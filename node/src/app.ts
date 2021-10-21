@@ -1,11 +1,25 @@
 import "dotenv/config"  // Importação de bib. que permite manipular arquivo .env
 import express from "express"; 
+import http from "http"; 
+import cors from "cors"; 
+
+import { Server } from "socket.io";
 
 import { router } from "./routes";
 
 const app = express()
-app.use(express.json()) // Indica para o axios que ele deve entender requisições JSON
+app.use(cors())
 
+const serverHttp = http.createServer(app)
+const io = new Server(serverHttp, {
+    cors: { origin: "*" }
+})
+
+io.on("connection", socket => {
+    console.log(`Usuário conectado no socket ${socket.id}`)
+})
+
+app.use(express.json()) // Indica para o axios que ele deve entender requisições JSON
 app.use(router)
 
 // Definindo a rota que vai fazer o login no Github
@@ -20,7 +34,4 @@ app.get("/signin/callback", (request, response) => {
     return response.json(code)
 })
 
-//  Definindo a porta que vai rodar a aplicação
-app.listen(4000, () => 
-    console.log(`Server is running on Port 4000`)
-)
+export { serverHttp, io }
