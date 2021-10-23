@@ -3,7 +3,6 @@ import { AuthenticateUserService } from "../services/authenticateUserService"
 
 class AuthenticateUserController{
     async handle(request: Request, response: Response){
-
         const { code } = request.body
         
         const service = new AuthenticateUserService()
