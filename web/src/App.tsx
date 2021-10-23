@@ -1,7 +1,7 @@
 import { LoginBox } from './components/LoginBox'
 import { MessageList } from './components/MessageList'
 
-import styles from './styles/App.module.scss'
+import styles from './App.module.scss'
 
 export function App() {
   return (
