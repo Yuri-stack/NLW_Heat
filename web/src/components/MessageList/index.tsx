@@ -4,7 +4,7 @@ import { api } from '../../services/api'
 import logoImg from '../../assets/logo.svg'
 import styles from './styles.module.scss'
 
-interface Message{
+interface IMessage{
     id: string
     text: string
     user: {
@@ -14,10 +14,10 @@ interface Message{
 }
 
 export function MessageList(){
-    const [messages, setMessages] = useState<Message[]>([])
+    const [messages, setMessages] = useState<IMessage[]>([])
 
     useEffect(() => {
-        api.get<Message[]>('messages/lastThree').then(response => {
+        api.get<IMessage[]>('messages/lastThree').then(response => {
             setMessages(response.data)
         })
     }, [])
