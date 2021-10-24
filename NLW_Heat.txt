@@ -1,6 +1,0 @@
-ts-node-dev: auto reload da app
-
-yarn tsc --init: inicia o tsconfig.json
-
-prisma: rever - simula um BD
-
