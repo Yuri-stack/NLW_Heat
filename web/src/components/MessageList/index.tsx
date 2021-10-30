@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import io from 'socket.io-client'
 import { api } from '../../services/api'
 
 import logoImg from '../../assets/logo.svg'
@@ -13,8 +14,30 @@ interface IMessage{
     }
 }
 
+const socket = io('http://localhost:4000')
+
+const messagesQueue: IMessage[] = []
+
+socket.on('new_message', (newMessage: IMessage) => {
+    messagesQueue.push(newMessage)
+})
+
 export function MessageList(){
     const [messages, setMessages] = useState<IMessage[]>([])
+
+    useEffect(() => {
+        setInterval(() => {
+            if(messagesQueue.length > 0){
+                setMessages(prevState => [
+                    messagesQueue[0],
+                    prevState[0],
+                    prevState[1]
+                ].filter(Boolean))
+
+                messagesQueue.shift()
+            }
+        }, 3000)
+    }, [])
 
     useEffect(() => {
         api.get<IMessage[]>('messages/lastThree').then(response => {
