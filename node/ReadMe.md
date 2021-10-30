@@ -51,10 +51,21 @@
 
 ## 👓Revised Concepts
 
-- Use of Routes with Express
+- Building an App with Typescript:
+    - Performance in learning/development
+    - Smart autocomplete
+    - Ease of finding errors in development
+    - Code Standardization
+
+- Building an App with Express:
+    - Framework that works well with Node in creating routes, middlewares, etc.
+
+- Build the database with Prisma.io
+    - BD Toolkit, which helps to minimize errors
+    - Simulates a BD
+
 - Authentication of user with Token and OAuth
 - Integration with FrontEnd using Socket.IO
-- Build the database with Prisma.io
 - Control of Logged Users
 ## 📕Installation
 
